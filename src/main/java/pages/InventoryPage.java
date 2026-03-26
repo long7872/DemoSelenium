@@ -8,4 +8,8 @@ public class InventoryPage {
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
     }
+
+    public void navigateBack() {
+        driver.navigate().back();
+    }
 }
