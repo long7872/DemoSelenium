@@ -1,9 +1,11 @@
 package tests;
 
+import java.time.Duration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import pages.HomePage;
 
@@ -13,14 +15,24 @@ public class BaseTests {
 
     @BeforeEach
     public void setUp() {
-        driver = new ChromeDriver();
-        driver.get("https://demo.opencart.com/");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        driver = new ChromeDriver(options);
+        driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
         homePage = new HomePage(driver);
-        // driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        Duration timeout = Duration.ofSeconds(15);
+        if (timeout != null) {
+            driver.manage().timeouts().implicitlyWait(timeout);
+        }
     }
     @AfterEach
     public void tearDown() {
+        try {
+            Thread.sleep(Duration.ofSeconds(3));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.quit();
     }
     public static void main(String[] args) {
