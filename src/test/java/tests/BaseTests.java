@@ -19,7 +19,7 @@ public class BaseTests {
         options.addArguments("--incognito");
         driver = new ChromeDriver(options);
         driver.get("https://www.saucedemo.com/");
-        driver.manage().window().maximize();
+        // driver.manage().window().maximize();
         homePage = new HomePage(driver);
         Duration timeout = Duration.ofSeconds(15);
         if (timeout != null) {
@@ -34,6 +34,9 @@ public class BaseTests {
             e.printStackTrace();
         }
         driver.quit();
+    }
+    public void navigateBack() {
+        driver.navigate().back();
     }
     public static void main(String[] args) {
         BaseTests test = new BaseTests();

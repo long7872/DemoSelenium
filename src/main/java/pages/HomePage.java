@@ -25,7 +25,7 @@ public class HomePage {
     public InventoryPage clickLoginButton() {
         driver.findElement(loginButtonLink).click();
 
-        if (driver.getCurrentUrl().contains("inventory.html")) {
+        if (isInventoryPage()) {
             return new InventoryPage(driver); 
         }
         return null;
@@ -33,5 +33,16 @@ public class HomePage {
     public String getErrorMessage() {
         WebElement error = driver.findElement(errorMessageLink);
         return error.getText();
+    }
+    public InventoryPage directAccessInventoryPage() {
+        driver.get("https://www.saucedemo.com/inventory.html");
+        
+        if (isInventoryPage()) {
+            return new InventoryPage(driver); 
+        }
+        return null;
+    }
+    public Boolean isInventoryPage() {
+        return driver.getCurrentUrl().contains("inventory.html");
     }
 }
