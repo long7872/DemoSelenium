@@ -8,9 +8,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import pages.HomePage;
+import pages.InventoryPage;
 
 public class BaseTests {
-    private WebDriver driver;
+    protected WebDriver driver;
     protected HomePage homePage;
 
     @BeforeEach
@@ -35,11 +36,15 @@ public class BaseTests {
         }
         driver.quit();
     }
+
+    protected InventoryPage loginAsStandardUser() {
+        String username = "standard_user";
+        String password = "secret_sauce";
+        homePage.sendTextToUsernameField(username);
+        homePage.sendTextToPasswordField(password);
+        return homePage.clickLoginButton();
+    }
     public void navigateBack() {
         driver.navigate().back();
-    }
-    public static void main(String[] args) {
-        BaseTests test = new BaseTests();
-        test.setUp();
     }
 }

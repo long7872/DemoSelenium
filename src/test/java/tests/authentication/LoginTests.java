@@ -8,7 +8,7 @@ import tests.BaseTests;
 
 public class LoginTests extends BaseTests {
     @Test
-    public void test_locked_out_user_cannot_login() {
+    public void test01_locked_out_user_cannot_login() {
         String username = "locked_out_user";
         String password = "secret_sauce";
         homePage.sendTextToUsernameField(username);
@@ -18,17 +18,16 @@ public class LoginTests extends BaseTests {
             "Error message incorrect or locked_out_user has been login!!!");
     }
     @Test
-    public InventoryPage test_standard_user_can_login_successfully() {
+    public void test02_standard_user_can_login_successfully() {
         String username = "standard_user";
         String password = "secret_sauce";
         homePage.sendTextToUsernameField(username);
         homePage.sendTextToPasswordField(password);
         InventoryPage inventoryPage = homePage.clickLoginButton();
         Assertions.assertNotNull(inventoryPage, "User " + username + " failed to login!!!");
-        return inventoryPage;
     }
     @Test
-    public void test_invalid_credentials_show_error_message() {
+    public void test03_invalid_credentials_show_error_message() {
         String username = "test_user";
         String password = "secret_sauce";
         homePage.sendTextToUsernameField(username);
@@ -38,7 +37,7 @@ public class LoginTests extends BaseTests {
             "Invalid Credentials Dont Show Error Message!!!");
     }
     @Test
-    public void test_empty_username_shows_error_message() {
+    public void test04_empty_username_shows_error_message() {
         String username = "";
         String password = "secret_sauce";
         homePage.sendTextToUsernameField(username);
@@ -48,7 +47,7 @@ public class LoginTests extends BaseTests {
             "Empty Username Dont Show Error Message!!!");
     }
     @Test
-    public void test_empty_password_shows_error_message() {
+    public void test05_empty_password_shows_error_message() {
         String username = "test_user";
         String password = "";
         homePage.sendTextToUsernameField(username);
